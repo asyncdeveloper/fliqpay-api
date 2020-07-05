@@ -4,7 +4,8 @@
   "description": "REST API for customer support ticketing system",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon -e ts -w ./src -x ts-node src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -14,5 +15,23 @@
   "bugs": {
     "url": "https://github.com/asyncdeveloper/fliqpay-api/issues"
   },
-  "homepage": "https://github.com/asyncdeveloper/fliqpay-api#readme"
+  "homepage": "https://github.com/asyncdeveloper/fliqpay-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.23.3",
+    "http-status-codes": "^1.4.0",
+    "mongoose": "^5.9.21",
+    "typescript": "^3.9.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.6",
+    "@types/helmet": "0.0.47",
+    "@types/http-status-codes": "^1.2.0",
+    "@types/mongoose": "^5.7.29",
+    "nodemon": "^2.0.4"
+  }
 }
