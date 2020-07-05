@@ -1,0 +1,18 @@
+{
+  "name": "fliqpay-api",
+  "version": "1.0.0",
+  "description": "REST API for customer support ticketing system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asyncdeveloper/fliqpay-api.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asyncdeveloper/fliqpay-api/issues"
+  },
+  "homepage": "https://github.com/asyncdeveloper/fliqpay-api#readme"
+}
