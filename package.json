@@ -4,8 +4,12 @@
   "description": "REST API for customer support ticketing system",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon -e ts -w ./src -x ts-node src/server.ts",
     "start": "ts-node src/server.ts",
-    "dev": "nodemon -e ts -w ./src -x ts-node src/server.ts"
+    "cy:run": "cypress run",
+    "test:integration": "NODE_ENV=testing start-server-and-test start http://localhost:8484 cy:run && exit",
+    "test:unit": "jest",
+    "test": "npm run test:unit && npm run test:integration && exit"
   },
   "repository": {
     "type": "git",
@@ -18,7 +22,7 @@
   "homepage": "https://github.com/asyncdeveloper/fliqpay-api#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "custom-env": "^2.0.1",
     "express": "^4.17.1",
     "helmet": "^3.23.3",
     "http-status-codes": "^1.4.0",
@@ -31,7 +35,13 @@
     "@types/express": "^4.17.6",
     "@types/helmet": "0.0.47",
     "@types/http-status-codes": "^1.2.0",
+    "@types/jest": "^26.0.3",
     "@types/mongoose": "^5.7.29",
-    "nodemon": "^2.0.4"
+    "@types/node": "^14.0.14",
+    "cypress": "^4.9.0",
+    "jest": "^26.1.0",
+    "nodemon": "^2.0.4",
+    "start-server-and-test": "^1.11.0",
+    "ts-jest": "^26.1.1"
   }
 }

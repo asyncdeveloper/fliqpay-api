@@ -91,3 +91,5 @@ dist
 .fusebox/
 .dynamodb/
 .tern-port
+cypress/*
+!cypress/integration/
