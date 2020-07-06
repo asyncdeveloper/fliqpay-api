@@ -10,8 +10,8 @@ const connectDB = async () => {
             useFindAndModify: false,
             useUnifiedTopology: true,
         };
-        await connect(mongoURI, options);
         console.log(`MongoDB Connected to ${mongoURI}`);
+        return await connect(mongoURI, options);
     } catch (err) {
         console.error(err.message);
         process.exit(1);

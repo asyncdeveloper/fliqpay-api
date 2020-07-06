@@ -4,13 +4,17 @@ import { Document, Model, model, Schema } from 'mongoose';
  * Interface to model the User Schema for TypeScript.
  * @param email:string
  * @param password:string
- * @param avatar:string
+ * @param name:string
+ * @param role:string
  */
 export interface IUser extends Document {
     email: string;
     password: string;
-    avatar: string;
+    name: string;
+    role: string;
 }
+
+export const Roles = ['customer', 'admin', 'support'];
 
 const userSchema: Schema = new Schema({
     email: {
@@ -22,13 +26,17 @@ const userSchema: Schema = new Schema({
         type: String,
         required: true
     },
-    avatar: {
-        type: String
+    name: {
+        type: String,
+        required: true,
+        minlength:[5]
     },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    role: {
+        type: String,
+        required: true,
+        enum : Roles,
+        default: Roles[0]
+    },
 });
 
 const User: Model<IUser> = model("User", userSchema);

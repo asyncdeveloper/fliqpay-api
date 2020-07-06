@@ -1,3 +1,7 @@
 {
-    "baseUrl": "http://localhost:8484"
+    "baseUrl": "http://localhost:8484",
+    "video": false,
+    "pluginsFile": false,
+    "watchForFileChanges": true,
+    "failOnStatusCode": false
 }

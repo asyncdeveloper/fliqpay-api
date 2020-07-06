@@ -3,6 +3,9 @@ import * as cors from 'cors';
 import * as helmet from 'helmet';
 import routes from './routes/index';
 import connectDB from "./config/database";
+import { errorHandler } from './middlewares/error.middleware';
+import { notFoundHandler } from './middlewares/notFound.middleware';
+import { Mongoose } from "mongoose";
 
 class App {
     public express: express.Application;
@@ -16,6 +19,9 @@ class App {
         this.setUpRoutes();
 
         this.connection = App.setUpDatabase();
+
+        this.express.use(notFoundHandler);
+        this.express.use(errorHandler);
     }
 
     private setUpMiddlewares(): void {
@@ -28,7 +34,7 @@ class App {
         this.express.use('/', routes);
     }
 
-    private static async setUpDatabase(): Promise<void> {
+    private static async setUpDatabase(): Promise<Mongoose> {
         return await connectDB();
     }
 

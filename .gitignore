@@ -93,3 +93,4 @@ dist
 .tern-port
 cypress/*
 !cypress/integration/
+!cypress/tsconfig.json
