@@ -1,8 +1,8 @@
 import User, { Roles } from "../models/User";
 
-const { body } = require('express-validator');
+import { body } from 'express-validator';
 
-export const userValidationRules = () => {
+export const userRegisterationRules = () => {
     return [
         body('email').isEmail().custom(value => {
             return User.findOne({ email : value }).then( user => {
@@ -15,5 +15,12 @@ export const userValidationRules = () => {
         body('role').trim().notEmpty().custom(value => {
             return  Roles.some(role => role === value)
         })
+    ]
+};
+
+export const userLoginRules = () => {
+    return [
+        body('email').isEmail().withMessage('Email is required'),
+        body('password').trim().notEmpty().isLength({ min: 5, max: 255 }).withMessage('Password is required'),
     ]
 };
