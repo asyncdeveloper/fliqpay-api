@@ -83,7 +83,12 @@ class RequestsController {
 
     public report = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const requests = await SupportRequest.find({ status: 'closed' }).populate('user', 'name role email');
+            const requests = await SupportRequest.find({
+                status: 'closed',
+                createdAt: {
+                    $gte: new Date((new Date().getTime() - (30 * 24 * 60 * 60 * 1000)))
+                }
+            }).populate('user', 'name role email');
 
             const data = requests.map(request => {
                return {
