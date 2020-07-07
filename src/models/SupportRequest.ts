@@ -5,6 +5,7 @@ import { IUser } from "./User";
  * Interface to model the Request Schema for TypeScript.
  * @param name:string
  * @param status:string
+ * @param user:IUser
  */
 export interface IRequest extends Document {
     name: string;
@@ -26,11 +27,11 @@ const requestSchema: Schema = new Schema({
         default: Status[0]
     },
     user: {
-        type: Object,
-        required: true,
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
-});
+},{ versionKey: false });
 
-const SupportRequest: Model<IRequest> = model("Request", requestSchema);
+const SupportRequest: Model<IRequest> = model("SupportRequest", requestSchema);
 
 export default SupportRequest;
