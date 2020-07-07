@@ -5,6 +5,7 @@ import * as bcrypt from "bcryptjs";
 
 const router = Router();
 
+//TODO:: switch seed to faker
 router.get('/clear-db', async (req: Request, res: Response) => {
     const con : Mongoose = await app.connection;
     await con.connection.db.dropDatabase();
