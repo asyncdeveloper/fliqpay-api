@@ -68,6 +68,8 @@ Express server listening on http://localhost:3001/, in development mode
 ## Testing 
 Configure .env.testing for testing environment
 
+- Test Database is seeded and cleared while running tests
+
 To run integration tests: 
 ```bash
 npm run test:integration
