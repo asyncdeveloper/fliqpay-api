@@ -41,14 +41,15 @@ cp .env.example .env
 ```
 
 ### Environment
-Configure .env for development environment
+Configure .env for development environment -
+Configure <MONGO_URI> only if using an online Database
 
 ```  
 MONGO_URI=<YOUR_MONGO_DB_URI>
 DB_NAME=<YOUR_MONGO_DB_NAME>
-APP_PORT=<YOUR_APP_PORT>
 DB_HOST=<YOUR_DB_HOST>
 DB_PORT=<YOUR_DB_PORT>
+APP_PORT=<YOUR_APP_PORT>
 JWT_SECRET=<YOUR_JWT_SECRET>
 JWT_EXPIRATION=<YOUR_JWT_EXPIRATION_TIME>
 ```
