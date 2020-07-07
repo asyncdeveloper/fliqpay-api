@@ -55,7 +55,7 @@ describe('Authentication',  () => {
             email : 'new@example.com',
             name :  'Oluwaseyi Samuel',
             password: 'pass123',
-            role: 'customer'
+            role: 'admin'
         };
 
         cy.request('POST', 'cypress/seed-user', userData);
@@ -75,7 +75,7 @@ describe('Authentication',  () => {
             email : 'new@example.com',
             name :  'Oluwaseyi Samuel',
             password: 'pass123',
-            role: 'customer'
+            role: 'admin'
         });
 
         loginUser({
