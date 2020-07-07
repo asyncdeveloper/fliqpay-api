@@ -25,4 +25,25 @@ router.post('/seed-user', async (req: Request, res: Response) => {
     return res.json({ status : true });
 });
 
+router.post('/seed-request', async (req: Request, res: Response) => {
+    const mongoose : Mongoose = await app.connection;
+
+    const { name } = req.body;
+
+    const user = await mongoose.connection.db.collection('users').insertOne({
+        name: 'Test', email: 'Assss'
+    });
+
+    await mongoose.connection.db.collection('requests').insertOne({ name, user });
+
+    return res.json({ status : true });
+});
+
+router.get('/get-request', async (req: Request, res: Response) => {
+    const mongoose : Mongoose = await app.connection;
+    const data =  await mongoose.connection.db.collection('requests').findOne({});
+
+    return res.json({ status : true, data });
+});
+
 export default router;
