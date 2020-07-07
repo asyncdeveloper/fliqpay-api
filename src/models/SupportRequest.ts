@@ -30,7 +30,7 @@ const requestSchema: Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }
-},{ versionKey: false });
+},{ versionKey: false, timestamps: true });
 
 const SupportRequest: Model<IRequest> = model("SupportRequest", requestSchema);
 

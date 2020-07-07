@@ -25,7 +25,7 @@ const commentSchema: Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'SupportRequest'
     }
-}, { versionKey: false });
+},{ versionKey: false, timestamps: true });
 
 const Comment: Model<IComment> = model("Comment", commentSchema);
 

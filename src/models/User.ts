@@ -37,7 +37,7 @@ const userSchema: Schema = new Schema({
         enum : Roles,
         default: Roles[0]
     },
-}, { versionKey: false });
+},{ versionKey: false, timestamps: true });
 
 const User: Model<IUser> = model("User", userSchema);
 
