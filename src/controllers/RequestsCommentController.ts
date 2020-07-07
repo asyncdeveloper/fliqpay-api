@@ -20,7 +20,43 @@ class RequestsCommentController {
                 errors: "Something went wrong. It's not your fault and we apologize for this"
             });
         }
-    }
+    };
+
+    public index = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            const comments: IComment[] = await Comment.find({
+                request: req.params.id,
+            }).populate('user', '_id name role email');
+
+            return res.status(HttpStatusCodes.OK).json({
+                message: 'Request comments retrieved successfully.',
+                data: comments
+            });
+
+        } catch (e) {
+            return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: "Something went wrong. It's not your fault and we apologize for this"
+            });
+        }
+    };
+
+    public show = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            const comments: IComment = await Comment.findOne({
+                _id: req.params.commentId,
+            }).populate('user', '_id name role email');
+
+            return res.status(HttpStatusCodes.OK).json({
+                message: 'Request comment retrieved successfully.',
+                data: comments
+            });
+
+        } catch (e) {
+            return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: "Something went wrong. It's not your fault and we apologize for this"
+            });
+        }
+    };
 
 }
 

@@ -78,6 +78,21 @@ class RequestsController {
             });
         }
     };
+
+    public report = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            //TODO:: - generate PDF/CSV for support requests CLOSED in last 30days
+            return res.status(HttpStatusCodes.OK).json({
+                message: 'Report generated successfully.',
+                data: {}
+            });
+
+        } catch (e) {
+            return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: "Something went wrong. It's not your fault and we apologize for this"
+            });
+        }
+    };
 }
 
 export default new RequestsController();

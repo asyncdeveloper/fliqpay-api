@@ -34,3 +34,32 @@ export const requestsCommentCreationRules = () => {
         })
     ]
 };
+
+export const requestsCommentShowRules = () => {
+    return [
+        param('id').custom(requestId => {
+            return SupportRequest.findById(requestId).then(request => {
+                if (! request)
+                    return Promise.reject('Request not found.');
+            });
+        })
+    ]
+};
+
+
+export const requestsCommentViewRules = () => {
+    return [
+        param('id').custom(requestId => {
+            return SupportRequest.findById(requestId).then(request => {
+                if (! request)
+                    return Promise.reject('Request not found.');
+            });
+        }),
+        param('commentId').custom(commentId => {
+            return Comment.findById(commentId).then(request => {
+                if (! request)
+                    return Promise.reject('Comment not found.');
+            });
+        })
+    ]
+};
