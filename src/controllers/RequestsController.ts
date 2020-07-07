@@ -34,12 +34,6 @@ class RequestsController {
                 _id: req.params.id,
             });
 
-            if(! request) {
-                return res.status(HttpStatusCodes.NOT_FOUND).json({
-                    errors: [{ message: 'Request not found.' }]
-                });
-            }
-
             return res.status(HttpStatusCodes.OK).json({
                 message: 'Request retrieved successfully.',
                 data: request
@@ -74,12 +68,6 @@ class RequestsController {
             { $set:{ status: req.body.status } },
             { new: true }
             );
-
-            if(! request) {
-                return res.status(HttpStatusCodes.NOT_FOUND).json({
-                    errors: [{ message: 'Request not found.' }]
-                });
-            }
 
             return res.status(HttpStatusCodes.OK).json({
                 message: 'Request updated successfully.',
