@@ -46,7 +46,21 @@ class RequestsController {
             });
 
         } catch (e) {
-            console.log(e);
+            return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: "Something went wrong. It's not your fault and we apologize for this"
+            });
+        }
+    };
+
+    public index = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            const requests: IRequest[] = await SupportRequest.find({});
+
+            return res.status(HttpStatusCodes.OK).json({
+                message: 'Requests retrieved successfully.',
+                data: requests
+            });
+        } catch (e) {
             return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
                 errors: "Something went wrong. It's not your fault and we apologize for this"
             });

@@ -41,6 +41,7 @@ describe('Requests',  () => {
         cy.request('cypress/clear-db');
         cy.request('POST', 'cypress/seed-user', customerData);
         cy.request('POST', 'cypress/seed-request', { name: 'Test Request' });
+        cy.request('POST', 'cypress/seed-request', { name: 'Test Request' });
     });
 
     it('.should() - assert that customer can create a support request with valid body',(done) => {
@@ -79,6 +80,23 @@ describe('Requests',  () => {
 
                     done();
                 });
+            });
+        });
+    });
+
+    it('.should() - assert can view all created requests',( done) => {
+        loginUser(customerData).then( (data) => {
+            cy.request({
+                method: 'GET',
+                url: '/api/requests',
+                headers: { Authorization: `Bearer ${data.body.token}` },
+                failOnStatusCode: false
+            }).then( response => {
+                expect(response.status).to.be.eq(200);
+                expect(response.body).to.have.keys('data', 'message');
+                expect(response.body.data).to.have.length(2);
+
+                done();
             });
         });
     });

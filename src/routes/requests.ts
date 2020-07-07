@@ -8,5 +8,6 @@ const router = Router();
 
 router.post('/', verifyToken, requestsCreationRules(), validate, RequestsController.create);
 router.get('/:id', verifyToken , RequestsController.show);
+router.get('/', verifyToken , RequestsController.index);
 
 export default router;
