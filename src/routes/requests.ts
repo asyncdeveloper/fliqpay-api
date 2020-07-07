@@ -9,5 +9,6 @@ const router = Router();
 router.post('/', verifyToken, requestsCreationRules(), validate, RequestsController.create);
 router.get('/:id', verifyToken , RequestsController.show);
 router.get('/', verifyToken , RequestsController.index);
+router.patch('/:id', verifyToken , RequestsController.update);
 
 export default router;

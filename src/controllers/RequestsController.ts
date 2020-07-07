@@ -66,6 +66,32 @@ class RequestsController {
             });
         }
     };
+
+    public update = async (req: Request, res: Response): Promise<Response> => {
+        try {
+            const request: IRequest = await SupportRequest.findByIdAndUpdate(
+                { _id: req.params.id },
+            { $set:{ status: req.body.status } },
+            { new: true }
+            );
+
+            if(! request) {
+                return res.status(HttpStatusCodes.NOT_FOUND).json({
+                    errors: [{ message: 'Request not found.' }]
+                });
+            }
+
+            return res.status(HttpStatusCodes.OK).json({
+                message: 'Request updated successfully.',
+                data: request
+            });
+
+        } catch (e) {
+            return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: "Something went wrong. It's not your fault and we apologize for this"
+            });
+        }
+    };
 }
 
 export default new RequestsController();

@@ -101,4 +101,26 @@ describe('Requests',  () => {
         });
     });
 
+    it('.should() - assert can update an existing request',( done) => {
+        cy.request({
+            method: 'GET',
+            url: '/cypress/get-request'
+        }).then(res => {
+            loginUser(customerData).then( (data) => {
+                cy.request({
+                    method: 'PATCH',
+                    url: `/api/requests/${res.body.data._id}`,
+                    body: { status: 'closed' },
+                    headers: { Authorization: `Bearer ${data.body.token}` },
+                    failOnStatusCode: false
+                }).then( response => {
+                    expect(response.status).to.be.eq(200);
+                    expect(response.body).to.have.keys('data', 'message');
+
+                    done();
+                });
+            });
+        });
+    });
+
 });
