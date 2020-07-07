@@ -24,6 +24,10 @@ describe('Authentication',  () => {
         cy.request('cypress/clear-db')
     });
 
+    after(() => {
+        cy.request('cypress/clear-db')
+    });
+
     it('.should() - assert that user can create account with correct credentials',(done) => {
         registerUser({
             email : 'me@example.com',

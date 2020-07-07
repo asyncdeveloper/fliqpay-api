@@ -44,6 +44,10 @@ describe('Requests',  () => {
         cy.request('POST', 'cypress/seed-request', { name: 'Test Request II', email: 'newuser1@e.com' });
     });
 
+    after(() => {
+        cy.request('cypress/clear-db')
+    });
+
     it('.should() - assert that customer can create a support request with valid body',(done) => {
         loginUser(customerData).then( data => {
             createRequest({ name: 'Test Support', user: data.body.data._id }, data.body.token)
