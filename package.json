@@ -30,6 +30,7 @@
     "express-validator": "^6.6.0",
     "helmet": "^3.23.3",
     "http-status-codes": "^1.4.0",
+    "json-2-csv": "^3.7.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.21",
     "typescript": "^3.9.6"

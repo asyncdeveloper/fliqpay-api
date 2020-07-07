@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import * as HttpStatusCodes from 'http-status-codes';
-import SupportRequest, { IRequest } from "../models/SupportRequest";
+import SupportRequest, { IRequest } from '../models/SupportRequest';
+import * as converter from 'json-2-csv';
+import * as  fs from 'fs';
 
 class RequestsController {
 
@@ -81,10 +83,24 @@ class RequestsController {
 
     public report = async (req: Request, res: Response): Promise<Response> => {
         try {
-            //TODO:: - generate PDF/CSV for support requests CLOSED in last 30days
+            const requests = await SupportRequest.find({ status: 'closed' }).populate('user', 'name role email');
+
+            const data = requests.map(request => {
+               return {
+                   name: request.name,
+                   userName: request.user.name,
+                   userRole: request.user.role,
+                   userEmail: request.user.email,
+                   status: request.status
+               }
+            });
+
+            const csvData = await converter.json2csvAsync(data);
+
+            await fs.writeFileSync(`reports-${(+new Date).toString(36).slice(-5)}.csv`, csvData);
+
             return res.status(HttpStatusCodes.OK).json({
                 message: 'Report generated successfully.',
-                data: {}
             });
 
         } catch (e) {
