@@ -1,13 +1,11 @@
 import { Request, Response } from 'express';
 import * as HttpStatusCodes from 'http-status-codes';
 import SupportRequest, { IRequest } from "../models/SupportRequest";
-import User from '../models/User';
 
 class RequestsController {
 
     public create = async (req: Request, res: Response): Promise<Response> => {
         let { name, user  } = req.body;
-        user = await User.findById(user).select('name _id');
 
         try {
             let request: IRequest = await new SupportRequest({ name, user }).save();
@@ -32,7 +30,7 @@ class RequestsController {
         try {
             const request: IRequest = await SupportRequest.findOne({
                 _id: req.params.id,
-            });
+            }).populate('user', '_id name role email');
 
             return res.status(HttpStatusCodes.OK).json({
                 message: 'Request retrieved successfully.',
@@ -48,7 +46,7 @@ class RequestsController {
 
     public index = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const requests: IRequest[] = await SupportRequest.find({});
+            const requests: IRequest[] = await SupportRequest.find({}).populate('user', '_id name role email');
 
             return res.status(HttpStatusCodes.OK).json({
                 message: 'Requests retrieved successfully.',
@@ -67,7 +65,7 @@ class RequestsController {
                 { _id: req.params.id },
             { $set:{ status: req.body.status } },
             { new: true }
-            );
+            ).populate('user', '_id name role email');
 
             return res.status(HttpStatusCodes.OK).json({
                 message: 'Request updated successfully.',

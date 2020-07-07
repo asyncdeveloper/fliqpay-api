@@ -40,8 +40,8 @@ describe('Requests',  () => {
     beforeEach(() => {
         cy.request('cypress/clear-db');
         cy.request('POST', 'cypress/seed-user', customerData);
-        cy.request('POST', 'cypress/seed-request', { name: 'Test Request' });
-        cy.request('POST', 'cypress/seed-request', { name: 'Test Request' });
+        cy.request('POST', 'cypress/seed-request', { name: 'Test Request I', email: 'newuser@e.com' });
+        cy.request('POST', 'cypress/seed-request', { name: 'Test Request II', email: 'newuser1@e.com' });
     });
 
     it('.should() - assert that customer can create a support request with valid body',(done) => {

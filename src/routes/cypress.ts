@@ -28,20 +28,23 @@ router.post('/seed-user', async (req: Request, res: Response) => {
 router.post('/seed-request', async (req: Request, res: Response) => {
     const mongoose : Mongoose = await app.connection;
 
+    const { email } = req.body;
+    const password = await bcrypt.hash('password', await bcrypt.genSalt(10));
+    const role  = 'customer';
+    const { ops } = await mongoose.connection.db.collection('users').insertOne({ name: 'Test User', email, password, role });
+
+    const user = ops[0];
+
     const { name } = req.body;
 
-    const user = await mongoose.connection.db.collection('users').insertOne({
-        name: 'Test', email: 'Assss'
-    });
-
-    await mongoose.connection.db.collection('requests').insertOne({ name, user });
+    await mongoose.connection.db.collection('supportrequests').insertOne({ name, user: user._id });
 
     return res.json({ status : true });
 });
 
 router.get('/get-request', async (req: Request, res: Response) => {
     const mongoose : Mongoose = await app.connection;
-    const data =  await mongoose.connection.db.collection('requests').findOne({});
+    const data =  await mongoose.connection.db.collection('supportrequests').findOne({});
 
     return res.json({ status : true, data });
 });

@@ -1,13 +1,10 @@
 import { body, param } from 'express-validator';
 import User from '../models/User';
-import SupportRequest, { Status } from "../models/SupportRequest";
+import SupportRequest, { Status } from '../models/SupportRequest';
 
 export const requestsCreationRules = () => {
     return [
         body('name').trim().notEmpty().isLength({ min: 5, max: 255 }).withMessage('Name is required'),
-        body('status').optional().custom(value => {
-            return Status.some(status => status === value)
-        }),
         body('user').custom(userId => {
             return User.findById(userId).then( user => {
                 if (! user)
